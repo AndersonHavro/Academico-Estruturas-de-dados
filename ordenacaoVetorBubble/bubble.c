@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+/* Codigo bonito da porra */
 int main() {
 	int vect[] = { 20,15,2,5,7,1,3 };
 	int tam = sizeof(vect) / sizeof(int);
