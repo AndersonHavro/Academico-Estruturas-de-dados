@@ -3,7 +3,6 @@
 int main() {
 	int vect[] = { 20,15,2,5,7,1,3 };
 	int tam = sizeof(vect) / sizeof(int);
-
 	int aux = 0;
 	for (int x = tam - 1; x > 0; x--)
 	{
