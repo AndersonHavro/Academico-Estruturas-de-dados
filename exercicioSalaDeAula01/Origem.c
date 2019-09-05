@@ -5,13 +5,18 @@ void PrencheVect();
 void Menu();
 void Opcoes();
 void OrdenarBubble();
+void IsertionSort();
+void SelectionSort();
+void BuscaSequencial(int aux);
+void BuscaBinaria(int aux);
 
 void Imprimir();
 
 
 int vect[5];
 int tam = sizeof(vect) / sizeof(int);
-int opcoes = 0, aux = 0;
+int opcoes = 0, aux = 0, busca = 0, resultado = 0;
+
 
 int main() {
 	setlocale(LC_ALL, "portuguese");
@@ -20,11 +25,10 @@ int main() {
 }
 
 void PrencheVect() {
-	int elemento = 0;
 	for (int i = 0; i < tam; i++)
 	{
 		printf("== DIGITE O %d ELEMENTO DO VETOR :", (i + 1));
-		scanf_s("%d", &elemento);
+		scanf_s("%d", &vect[i]);
 	}
 }
 
@@ -37,17 +41,17 @@ void Menu() {
 	do
 	{
 		printf("===============================================\n");
-		printf("================== OPÇÕES =====================\n");
+		printf("                 = OPÇÕES =                    \n");
 		printf("===============================================\n");
 		printf("");
-		printf("( 1 ) ========== ORDERNAR POR \"BUBBLE SORT\"==\n");
+		printf("( 1 ) ========== ORDERNAR POR \"BUBBLE SORT\"\n");
 		printf("( 2 ) ========== ORDERNAR POR \"INSERTION SORT\"\n");
 		printf("( 3 ) ========== ORDERNAR POR \"SELECTION SORT\"\n");
-		printf("( 4 ) ========== ORDERNAR POR \"QUICK SORT\"===\n");
-		printf("( 5 ) ========== BUSCAR VETOR \"SEQUENCIAL\"===\n");
-		printf("( 6 ) ========== ORDERNAR POR \"EXAUSTIVA\"====\n");
-		printf("( 7 ) ========== ORDERNAR POR \"BINÁRIA\"======\n");
-		printf("( 8 ) ========== SAIR==========================\n");
+		printf("( 4 ) ========== ORDERNAR POR \"QUICK SORT\"\n");
+		printf("( 5 ) ========== BUSCAR VETOR \"SEQUENCIAL\"\n");
+		printf("( 6 ) ========== BUSCAR VETOR \"EXAUSTIVA\"\n");
+		printf("( 7 ) ========== BUSCAR VETOR \"BINÁRIA\"=\n");
+		printf("( 8 ) ========== SAIR\n");
 		printf("");
 		printf("===============================================\n");
 
@@ -59,46 +63,49 @@ void Opcoes() {
 
 	scanf_s("%d", &opcoes);
 
-	if (opcoes == 1)
+	switch (opcoes)
 	{
-		OrdenarBubble();
-		Imprimir();
-
-	}
-
-	/*switch (opcoes)
-	{
+	case 0:
+		printf("Fim do programa!!!");
+		return 0;
 	case 1:
 		OrdenarBubble();
+
+		break;
 	case 2:
-		printf("opcao 2\n");
+		IsertionSort();
+
 		break;
 	case 3:
-		printf("opcao 3\n");
+		SelectionSort();
+
 		break;
 	case 4:
-		printf("opcao 4\n");
+		printf("opcao 4 incompleta\n");
 		break;
 	case 5:
-
-		printf("opcao 5\n");
+		BuscaSequencial(aux);
 		break;
 	case 6:
-		printf("opcao 6\n");
+		printf("opcao 6 incompleta\n");
 		break;
 	case 7:
-		printf("opcao 7\n");
+		BuscaBinaria(aux);
 		break;
-	}*/
-	
+	default:
+		printf("Opção Inválida!!!");
+		break;
+	}
+	Imprimir();
 }
+
 void OrdenarBubble() {
 
 	for (int x = tam - 1; x > 0; x--)
 	{
 		for (int y = 0; y < x; y++)
 		{
-			if (vect[y] < vect[y + 1])
+			if (vect[y] > vect[y + 1])
 			{
 				aux = vect[y];
 				vect[y] = vect[y + 1];
@@ -106,12 +113,76 @@ void OrdenarBubble() {
 			}
 		}
 	}
-	Imprimir();
-}
-void Imprimir() {
-	for (int i = 0; i < tam; i++)
-	{
-		printf("%d", vect[i]);
-	}
 
 }
+void IsertionSort() {
+	for (int j = 1; j < tam; j++)
+	{
+		if (vect[j] < vect[j - 1])
+		{
+			for (int i = j; i != 0; i--)
+			{
+				aux = vect[i];
+				vect[i] = vect[i - 1];
+				vect[i - 1] = aux;
+			}
+		}
+	}
+}
+void SelectionSort() {
+	for (int i = 0; i < tam - 1; i++)
+	{
+		for (int j = i + 1; j < tam; j++)
+		{
+			aux = vect[i];
+			vect[i] = vect[j];
+			vect[j] = aux;
+		}
+	}
+}
+void BuscaSequencial(int aux) {
+	printf("Informe o numero a ser procurado: ");
+	scanf_s("%i", &aux);
+	for (int i = 0; i < tam - 1; i++)
+	{
+		if (vect[i] == aux)
+		{
+			resultado = i;
+			break;
+		}
+	}
+}
+void BuscaBinaria(int aux) {
+	int inf = 0, sup = (tam - 1), meio;
+	printf("Informe o numero a ser procurado: ");
+	scanf("%d", &aux);
+	while (inf <= sup) {
+		meio = (inf + sup) / 2;
+		if (aux == vect[meio]) {
+			resultado = meio;
+			return 0;
+		}
+		if (aux < vect[meio])
+			sup = meio - 1;
+		else
+			inf = meio + 1;
+	}
+	void Imprimir(); {
+		if (opcoes > 0 && opcoes < 5)
+		{
+			printf("\n\n");
+			printf("Vetor: ");
+			for (int i = 0; i < tam; i++)
+			{
+				printf("%d", vect[i]);
+			}
+			printf("\n\n");
+		}
+		if (opcoes > 4 && opcoes < 8)
+		{
+			printf("A posição vetor é: %i\n", resultado);
+		}
+
+
+
+	}
