@@ -2,6 +2,7 @@
 #include<locale.h>
 #include<stdlib.h>
 
+#pragma region "Assinaturas"
 void PrencheVect();
 void Menu();
 void Opcoes();
@@ -10,21 +11,18 @@ void IsertionSort();
 void SelectionSort();
 void BuscaSequencial(int aux);
 void BuscaBinaria(int aux);
-
 void Imprimir();
-
-
+#pragma endregion
+#pragma region "Variaveis"
 int vect[5];
 int tam = sizeof(vect) / sizeof(int);
 int opcoes = 0, aux = 0, busca = 0, resultado = 0;
-
-
+#pragma endregion
 int main() {
 	setlocale(LC_ALL, "portuguese");
 	Menu(); //CHAMA O MENU GERAL
 	return 0;
 }
-
 void PrencheVect() {
 	for (int i = 0; i < tam; i++)
 	{
@@ -32,15 +30,12 @@ void PrencheVect() {
 		scanf_s("%d", &vect[i]);
 	}
 }
-
 void Menu() {
-
-	printf("==================== MENU =====================\n");
+		printf("==================== MENU =====================\n");
 	printf("");
 	PrencheVect();
 	printf("");
-
-	do
+		do
 	{
 		system("cls");
 		printf("===============================================\n");
@@ -57,28 +52,22 @@ void Menu() {
 		printf("( 8 ) ========== SAIR\n");
 		printf("");
 		printf("===============================================\n");
-
 		Opcoes();
 		system("pause");
 	} while (opcoes > 0 && opcoes < 8);
-
-}
+	}
 void Opcoes() {
-
-	scanf_s("%d", &opcoes);
-
-	switch (opcoes)
+		scanf_s("%d", &opcoes);
+		switch (opcoes)
 	{
 	case 8:
 		printf("Fim do programa!!!");
 		return 0;
 	case 1:
 		OrdenarBubble();
-
 		break;
 	case 2:
 		IsertionSort();
-
 		break;
 	case 3:
 		SelectionSort();
@@ -99,10 +88,8 @@ void Opcoes() {
 		printf("Opção Inválida!!!");
 		break;
 	}
-
 	Imprimir();
 }
-
 void OrdenarBubble() {
 
 	for (int x = tam - 1; x > 0; x--)
@@ -191,3 +178,5 @@ void Imprimir() {
 
 
 }
+
+
