@@ -11,7 +11,9 @@ void IsertionSort();
 void SelectionSort();
 void BuscaSequencial(int aux);
 void BuscaBinaria(int aux);
+int Quick(int vect[], int e, int d);
 void Imprimir();
+
 #pragma endregion
 #pragma region "Variaveis"
 int vect[5];
@@ -73,7 +75,7 @@ void Opcoes() {
 		SelectionSort();
 		break;
 	case 4:
-		printf("opcao 4 incompleta\n");
+		Quick(vect, 0, tam-1);
 		break;
 	case 5:
 		BuscaSequencial(aux);
@@ -89,6 +91,38 @@ void Opcoes() {
 		break;
 	}
 	Imprimir();
+}
+int Quick(int vect[], int e, int d) {
+	int i, j, p, y;
+	i = e;
+	j = d;
+	p = vect[d];
+	while (i <= j) {
+		while (vect[i] < p && i < d) {
+			i++;
+		}
+		while (vect[j] > p && j > e)
+		{
+			j--;
+		}
+		if (i <= j)
+		{
+			y = vect[i];
+			vect[i] = vect[j];
+			vect[j] = y;
+			i++;
+			j--;
+		}
+
+	}
+	if (j > e)
+	{
+		Quick(vect, e, j);
+	}
+	if (i < d)
+	{
+		Quick(vect, i, d);
+	}
 }
 void OrdenarBubble() {
 
