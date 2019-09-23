@@ -7,12 +7,14 @@ int vetor[MAX];
 int opcao = 0;
 int iPosicao = 0;
 
-
+#pragma region assinaturasMetodos
 void Menu();
 void Opcoes();
-void InserirFila();
+void Inserir();
 void RemoverFila();
+void RemoverPilha();
 void Exibir();
+#pragma endregion
 
 int main() {
 	setlocale(LC_ALL, "portuguese");
@@ -30,14 +32,15 @@ void Menu() {
 		printf("===============================================\n");
 		printf("");
 		printf("( 1 ) ========== INSERIR\"\n");
-		printf("( 2 ) ========== EXCLUIR\"\n");
-		printf("( 3 ) ========== EXIBIR\"\n");
-		printf("( 4 ) ========== SAIR\n");
+		printf("( 2 ) ========== EXCLUIR FILA\"\n");
+		printf("( 3 ) ========== EXCLUIR PILHA\"\n");
+		printf("( 4 ) ========== EXIBIR\"\n");
+		printf("( 5 ) ========== SAIR\n");
 		printf("");
 		printf("===============================================\n");
 		Opcoes();
 		system("pause");
-	} while (opcao > 0 && opcao < 4);
+	} while (opcao > 0 && opcao < 5);
 }
 void Opcoes() {
 
@@ -45,15 +48,18 @@ void Opcoes() {
 	switch (opcao)
 	{
 	case 1:
-		InserirFila();
+		Inserir();
 		break;
 	case 2:
-		printf("Opcao2\n");
+		RemoverFila();
 		break;
 	case 3:
-		Exibir();
+		RemoverPilha();
 		break;
 	case 4:
+		Exibir();
+		break;
+	case 5:
 		printf("Programa encerrado!!!\n");
 		return 0;
 		break;
@@ -62,15 +68,17 @@ void Opcoes() {
 		break;
 	}
 }
-void InserirFila() {
+void Inserir() {
 	if (iPosicao == MAX)
 	{
 		printf("Vetor já preenchido!!!");
 	}
-	else
+	else 
 	{
 		printf("Digite o valor a ser inserido na fila:");
 		scanf_s("%i", &vetor[iPosicao]);
+		printf("valor inserido com sucesso na posicao %i\n",iPosicao);
+
 		iPosicao++;
 	}
 }
@@ -90,6 +98,23 @@ void RemoverFila() {
 
 	}
 }
-void Exibir() {
+void RemoverPilha() {
+	if (iPosicao < 0)
+	{
+		printf("Vetor vazio!!!");
+	}
+	else
+	{
+		vetor[iPosicao] = 0;
+		iPosicao--;
 
+	}
+}
+void Exibir() {
+	printf("vetor:");
+	
+	for (int i = 0; i < MAX; i++)
+	{
+		printf("%i, ",vetor[i]);
+	}
 }
